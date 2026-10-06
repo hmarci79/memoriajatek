@@ -17,5 +17,10 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
         </Grid>
+        <TextBlock HorizontalAlignment="Right" Margin="0,-210,0,0" TextWrapping="Wrap" Text="Pontszám" VerticalAlignment="Center" TextAlignment="Center"/>
+        <TextBlock x:Name="tb_pontszam" TextWrapping="Wrap" Text="" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,-130,0,0" FontSize="32" TextAlignment="Center"/>
+        <TextBlock HorizontalAlignment="Right" Margin="0,130,0,0" TextWrapping="Wrap" Text="Próbálkozások" VerticalAlignment="Center" TextAlignment="Center"/>
+        <TextBlock x:Name="tb_probalkozasok" TextWrapping="Wrap" Text="" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,210,0,0" FontSize="32" TextAlignment="Center"/>
+
     </Grid>
 </Window>

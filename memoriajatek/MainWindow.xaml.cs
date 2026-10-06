@@ -141,6 +141,21 @@ namespace memoriajatek
                     masodik = true;
                 }
             }
+            tb_pontszam.Text = ""+pontszam;
+            tb_probalkozasok.Text = "" + probalkozasok;
+            if (pontszam == kivalasztottMeret * kivalasztottMeret / 2)
+            {
+                if (MessageBox.Show("Szeretnél új játékot kezdeni?", "Gratulálok! Nyertél!", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    MainWindow uj = new MainWindow();
+                    uj.Show();
+                }
+                else
+                {
+                    Application.Current.Shutdown();
+                }
+                
+            }
         }
 
         private string GetContent(int index)
