@@ -27,6 +27,8 @@ namespace memoriajatek
         private Button elso;
         private int pontszam = 0;
         private int probalkozasok = 0;
+        private bool hiba = false;
+        Button gomb;
         public MainWindow()
         {
             InitializeComponent();
@@ -64,14 +66,15 @@ namespace memoriajatek
                     Button btn = new Button
                     {
                         Name = $"btn_{index}",
-                        FontSize = 360/meret/4,
+                        FontSize = 360 / meret / 4,
                         Margin = new Thickness(2),
                         Height = 360 / meret,
                         Width = 360 / meret,
                         HorizontalContentAlignment = HorizontalAlignment.Center,
                         VerticalContentAlignment = VerticalAlignment.Center,
+                        Content = ""
                     };
-                    btn.Click += Buttton_Click;
+                    btn.Click += Button_Click;
                     Grid.SetRow(btn, i);
                     Grid.SetColumn(btn, j);
                     grid_kartyak.Children.Add(btn);
@@ -102,34 +105,41 @@ namespace memoriajatek
             }
         }
 
-        private void Buttton_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = (Button)sender;
-            int index = Convert.ToInt32(Convert.ToString(btn.Name.Remove(0,4)));
-            if (masodik)
+            if (hiba)
             {
-                if (elso.Name != btn.Name)
-                {
-                    btn.Content = GetContent(index);
-                    if (elso.Content == btn.Content)
-                    {
-                        pontszam++;
-                    }
-                    else
-                    {
-                        Thread.Sleep(5000);
-                        btn.Content = "";
-                        elso.Content = "";
-                    }
-                    masodik = false;
-                    probalkozasok++;
-                }
+                gomb.Content = "";
+                elso.Content = "";
             }
-            else
+            hiba = false;
+            gomb = (Button)sender;
+            int index = Convert.ToInt32(Convert.ToString(gomb.Name.Remove(0,4)));
+            if (gomb.Content == "")
             {
-                btn.Content = GetContent(index);
-                elso = btn;
-                masodik = true;
+                if (masodik)
+                {
+                    if (elso.Name != gomb.Name)
+                    {
+                        gomb.Content = GetContent(index);
+                        if (elso.Content == gomb.Content)
+                        {
+                            pontszam++;
+                        }
+                        else
+                        {
+                            hiba = true;
+                        }
+                        masodik = false;
+                        probalkozasok++;
+                    }
+                }
+                else
+                {
+                    gomb.Content = GetContent(index);
+                    elso = gomb;
+                    masodik = true;
+                }
             }
         }
 
